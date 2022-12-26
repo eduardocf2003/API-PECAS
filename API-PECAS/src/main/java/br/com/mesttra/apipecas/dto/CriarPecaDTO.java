@@ -8,25 +8,25 @@ import org.springframework.beans.BeanUtils;
 
 public class CriarPecaDTO {
 
-    @NotBlank
+    @NotBlank(message = "O nome da peça é obrigatório")
     private String nome;
 
-    @NotBlank
+    @NotBlank(message = "O modelo do carro é obrigatório")
     private String modeloCarro;
 
-    @NotBlank
+    @NotBlank(message = "O fabricante não pode ser nulo")
     private String fabricante;
 
-    @NotNull
+    @NotNull(message = "O preço de custo não pode ser nulo")
     private Double precoCusto;
 
-    @NotNull
+    @NotNull(message = "O preço de venda é obrigatório")
     private Double precoVenda;
 
-    @NotNull
+    @NotNull(message = "Quantidade em estoque é obrigatória")
     private Integer quantidadeEstoque;
 
-    private Categoria cat;
+    private Categoria categoria;
 
     public Pecas toEntity() {
         Pecas peca = new Pecas();
@@ -82,11 +82,11 @@ public class CriarPecaDTO {
         this.quantidadeEstoque = quantidadeEstoque;
     }
 
-    public Categoria getCat() {
-        return cat;
+    public Categoria getCategoria() {
+        return categoria;
     }
 
-    public void setCat(Categoria cat) {
-        this.cat = cat;
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }

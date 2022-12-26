@@ -4,14 +4,19 @@ import br.com.mesttra.apipecas.entity.Pecas;
 import jdk.jfr.Registered;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import br.com.mesttra.apipecas.enums.Categoria;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface PecaRepository extends CrudRepository<Pecas, Long> {
 
-    Optional<Pecas> findByNome(String nome);
-    Optional<Pecas> findById(Long id);
+    List<Pecas> findByNomeStartsWith(String texto);
+
+    List<Pecas> findByCategoria(Categoria categoria);
+
+    List<Pecas> findByModeloCarro(String modelo);
 
 }
 
