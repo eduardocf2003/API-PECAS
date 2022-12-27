@@ -42,14 +42,20 @@ public class PecaService {
         return (List<Pecas>) pecaRepository.findAll();
     }
 
-    public boolean alterarPeca (Pecas peca) {
-        if (!pecaRepository.existsById(peca.getBarcode())) {
-            return false;
+    public boolean alterarPeca (Pecas peca, Long id) throws ErroDeNegocioException {
+        Pecas pecaBanco = pecaRepository.findById(id).get();
+        if (pecaBanco != null) {
+            pecaBanco.setNome(peca.getNome());
+            pecaBanco.setFabricante(peca.getFabricante());
+            pecaBanco.setCategoria(peca.getCategoria());
+            pecaBanco.setModeloCarro(peca.getModeloCarro());
+            pecaBanco.setPrecoCusto(peca.getPrecoCusto());
+            pecaBanco.setPrecoVenda(peca.getPrecoVenda());
+            pecaBanco.setQuantidadeEstoque(peca.getQuantidadeEstoque());
+            pecaRepository.save(pecaBanco);
+            return true;
         }
-
-        pecaRepository.save(peca);
-        return true;
-
+        return false;
     }
 
     public boolean deletarPeca (Long id) {

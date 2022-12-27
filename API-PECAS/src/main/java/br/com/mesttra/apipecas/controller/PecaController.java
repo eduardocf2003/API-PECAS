@@ -9,6 +9,7 @@ import br.com.mesttra.apipecas.service.PecaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -55,10 +56,10 @@ public class PecaController {
         return this.pecaService.buscaPecaPorCategoria(categoria);
     }
 
-    @PutMapping(path = "/{barcode}")
+    @PutMapping(path = "/{barcode}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(code = HttpStatus.ACCEPTED)
-    public boolean alterarPeca(@PathVariable Long barcode, @RequestBody Pecas peca) throws ErroDeNegocioException {
-        return this.pecaService.alterarPeca(peca);
+    public boolean alterarPeca(@PathVariable Long barcode, @RequestBody @Valid Pecas peca) throws ErroDeNegocioException {
+        return pecaService.alterarPeca(peca, barcode);
     }
 
 
